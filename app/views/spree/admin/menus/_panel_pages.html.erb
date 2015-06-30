@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="heading-pages">
+    <h4 class="panel-title">
+      <a role="button" data-toggle="collapse" data-parent="#nav-panels" href="#collapse-pages" aria-expanded="false" aria-controls="collapse-pages">
+        Pages
+      </a>
+    </h4>
+  </div>
+  <div id="collapse-pages" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-pages">
+    <div class="panel-body">
+      <% if @pages.any? %>
+        <ul class="list-unstyled">
+        <% @pages.each do |page| %>
+          <li><%= check_box_tag 'page' %> <%= page.title %> </li>
+        <% end %>
+        </ul>
+      <% else %>
+        <p>You don't have any visible pages that can be used in a menu yet...</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="heading-taxons">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#nav-panels" href="#collapse-taxons" aria-expanded="true" aria-controls="collapse-taxons">
+        Taxonomies
+      </a>
+    </h4>
+  </div>
+  <div id="collapse-taxons" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-taxons">
+    <div class="panel-body">
+      <% if @taxonomies.any? %>
+        <ul class="list-unstyled">
+        <% @taxonomies.each do |taxonomy| %>
+          <li><%= check_box_tag 'taxonomy' %> <%= taxonomy.name %> </li>
+        <% end %>
+        </ul>
+      <% else %>
+        <p>You don't have any visible taxonomies that can be used in a menu yet...</p>
+      <% end %>
+    </div>
+  </div>
+</div>

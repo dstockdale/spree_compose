@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+  <%= Spree.t :title, scope: :menus %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:create), 
+        new_admin_menu_path, 
+        { :class => "btn-success", :icon => 'add' } %>
+<% end if can?(:create, Spree::Compose::Menu) %>
+
+<% if @menus.any? %>
+  <table class="table">
+    <thead>
+      <tr data-hook="admin_menus_index_headers">
+        <th><%= Spree.t(:title, scope: :menus) %></th>
+        <th data-hook="admin_menus_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @menus.each do |menu| %>
+      <tr id="<%= spree_dom_id menu %>" data-hook="admin_menus_index_rows" class="<%= cycle('odd', 'even') %>">
+        <td><%= link_to menu.name, admin_menu_path(menu) %></td>
+        <td class="actions actions-3 text-right" data-hook="admin_menu_index_row_actions">
+          
+          <%= link_to_with_icon('delete', nil, admin_menu_path(menu),
+                title: Spree.t(:delete),
+                data: { confirm: Spree.t(:are_you_sure), action: 'remove' }, 
+                class: "btn btn-danger btn-sm delete-resource icon-link with-tip action-delete") if can?(:destroy, menu) %>
+
+          <%= link_to_with_icon('edit', nil, admin_menu_path(menu),
+                title: Spree.t(:edit),
+                data: { action: 'edit' }, 
+                class: "btn btn-primary btn-sm icon-link with-tip action-edit") if can?(:edit, menu)  %>
+
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
