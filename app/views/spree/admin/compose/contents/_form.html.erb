@@ -1,0 +1,71 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @content } %>
+
+<%= f.field_container :visible, class: ['form-group'] do %>
+  <label class="checkbox-inline">
+    <%= f.check_box :visible, class: 'checkbox visible' %> <%= Spree.t(:visible, scope: :contents) %>
+  </label>
+<% end %>
+
+<%= f.field_container :content_type, class: ['form-group'] do %>
+  <%= f.label :content_type, Spree.t(:content_type, scope: :contents) %> <span class="required">*</span>
+  <%= f.select :content_type, ["Page", "Snippet", "Post", "Layout"], {}, { class: "form-control" } %>
+<% end %>
+
+<%= f.field_container :slug, class: ['form-group','page-attribute'] do %>
+  <%= f.label :slug, Spree.t(:slug, scope: :contents) %> <span class="required">*</span>
+  <%= f.text_field :slug, class: 'form-control slug' %>
+  <%= f.error_message_on :slug %>
+<% end %>
+
+<%= f.field_container :title, class: ['form-group','page-attribute'] do %>
+  <%= f.label :title, Spree.t(:title, scope: :contents) %> <span class="required">*</span>
+  <%= f.text_field :title, class: 'form-control title' %>
+  <%= f.error_message_on :title %>
+<% end %>  
+
+<%= f.field_container :description, class: ['form-group','page-attribute'] do %>
+  <%= f.label :description, Spree.t(:description, scope: :contents) %> <span class="required">*</span>
+  <%= f.text_field :description, class: 'form-control description' %>
+  <%= f.error_message_on :description %>
+<% end %>
+
+<%= f.field_container :keywords, class: ['form-group','page-attribute'] do %>
+  <%= f.label :keywords, Spree.t(:keywords, scope: :contents) %> <span class="required">*</span>
+  <%= f.text_field :keywords, class: 'form-control keywords' %>
+  <%= f.error_message_on :keywords %>
+<% end %>
+
+<%= f.field_container :subject_id, class: ['form-group','partial-attribute'] do %>
+  <%= f.label :subject_id, Spree.t(:subject_id, scope: :contents) %> <span class="required">*</span>
+  <%= f.text_field :subject_id, class: 'form-control subject_id' %>
+  <%= f.error_message_on :subject_id %>
+<% end %>
+
+<%= f.field_container :subject_body, class: ['form-group'] do %>
+  <%= f.label :body, Spree.t(:body, scope: :contents) %> <span class="required">*</span>
+  <%= f.error_message_on :body %>
+  <%= f.text_area :body, class: 'form-control body summernote' %>
+<% end %>
+
+<script>
+  <% inital_attr = @content.content_type.nil? ? "Page" : "#{@content.content_type}" %>
+  var initalAttr = "<%= inital_attr %>";
+  var attrs = {
+    Page: {
+      hide: ".partial-attribute",
+      show: ".page-attribute"
+    }, 
+    Snippet: {
+      hide: ".page-attribute",
+      show: ".partial-attribute"
+    }
+  };
+  var displayFields = function(content_type) {
+    $(attrs[content_type].hide).hide();
+    $(attrs[content_type].show).show();
+  };
+  displayFields(initalAttr);
+  $('#content_content_type').on('change', function(e){
+    displayFields(this.value);
+  });
+</script>

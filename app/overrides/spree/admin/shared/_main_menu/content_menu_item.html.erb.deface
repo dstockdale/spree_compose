@@ -1,0 +1,6 @@
+<!-- insert_before "erb[silent]:contains('if can? :admin, Spree::Admin::ReportsController')" -->
+<% if can? :admin, Spree::Compose::Content %>
+  <ul class="nav nav-sidebar">
+    <%= tab Spree.t(:name, scope: :contents), icon: "edit", url: admin_contents_url %>
+  </ul>
+<% end %>

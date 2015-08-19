@@ -1,0 +1,12 @@
+<% content_for :page_title do %>
+  <%= Spree.t :new, scope: :contents %>
+<% end %>
+
+<%= form_for [:admin, @content], :html => { :multipart => true } do |f| %>
+  <%= render partial: 'form', :locals => { :f => f } %>
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %>
+    <span class="or"><%= Spree.t(:or) %></span>
+    <%= button_link_to Spree.t('actions.cancel'), admin_contents_url, :icon => 'remove' %>
+  </div>
+<% end %>

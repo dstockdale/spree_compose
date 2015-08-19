@@ -7,7 +7,7 @@ class Spree::Admin::MenusController < Spree::Admin::BaseController
 
   def show
     @menus = Spree::Compose::Menu.all
-    @pages = Spree::Arrangement.where(context: "Page")
+    @pages = Spree::Compose::Content.where(content_type: "Page")
     @taxonomies = Spree::Taxonomy.includes(root: :children)
   end
 

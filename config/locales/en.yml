@@ -1,7 +1,19 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   spree:
+    controller:
+      controller_name: Compose
     menus:
       title: Menus
+    contents:
+      name: Content
+      create: Add Content
+      new: New Contents
+      edit: Editing Content
+      visible: Display?
+      content_type: Type of Content
+      subject_id: Where should it appear?
+      body: Content
+      everything: "Pages & Partials"
+      visit_page: "Visit page: "
