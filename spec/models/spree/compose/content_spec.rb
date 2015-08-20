@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Spree::Compose::Content, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it { is_expected.to validate_uniqueness_of(:slug) }
+  end
 end

@@ -2,6 +2,10 @@ class Spree::Compose::Content < ActiveRecord::Base
 
   scope :visible, -> { where(visible: true) }
   scope :pages, -> { where(content_type: 'Page') }
+  scope :snippets, -> { where(content_type: 'Snippet') }
+  scope :posts, -> { where(content_type: 'Post') }
+
+  validates :slug, uniqueness: true
 
   translates :body, :slug, :description, :keywords, :title, fallbacks_for_empty_translations: true
   include SpreeI18n::Translatable
