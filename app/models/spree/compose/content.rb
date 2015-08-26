@@ -1,5 +1,9 @@
 class Spree::Compose::Content < ActiveRecord::Base
 
+  has_many :assignments
+
+  accepts_nested_attributes_for :assignments, allow_destroy: true, reject_if: proc { |attributes| attributes['zone'].blank? }
+
   scope :visible, -> { where(visible: true) }
   scope :pages, -> { where(content_type: 'Page') }
   scope :snippets, -> { where(content_type: 'Snippet') }

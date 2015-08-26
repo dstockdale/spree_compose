@@ -1,0 +1,2 @@
+<!-- insert_top '#footer-left' -->
+<%= zone_render("footer-left") %>

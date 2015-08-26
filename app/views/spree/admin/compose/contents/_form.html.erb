@@ -35,11 +35,26 @@
   <%= f.error_message_on :keywords %>
 <% end %>
 
-<%= f.field_container :subject_id, class: ['form-group','partial-attribute'] do %>
-  <%= f.label :subject_id, Spree.t(:subject_id, scope: :contents) %> <span class="required">*</span>
-  <%= f.text_field :subject_id, class: 'form-control subject_id' %>
-  <%= f.error_message_on :subject_id %>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">Where's it go? (Page path &amp; Zone)</div>
+  <div class="panel-body">
+    <%= f.fields_for :assignments, f.object.assignments do |a| %>
+      <div class="form-group row">
+        <%= a.label :path, Spree.t(:path, scope: :contents), class: 'col-md-1 control-label' %>
+        <div class="col-md-4">  
+          <%= a.text_field :path, class: 'form-control path' %>
+        </div>
+        <%= a.label :zone, Spree.t(:zone, scope: :contents), class: 'col-md-1 control-label' %>
+        <div class="col-md-4">  
+          <%= a.text_field :zone, class: 'form-control zone' %>
+        </div>
+        <div class="col-md-2">
+          Delete: <%= a.check_box :_destroy %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= f.field_container :subject_body, class: ['form-group'] do %>
   <%= f.label :body, Spree.t(:body, scope: :contents) %> <span class="required">*</span>

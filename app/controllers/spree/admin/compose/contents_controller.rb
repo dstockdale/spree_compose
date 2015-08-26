@@ -7,9 +7,11 @@ class Spree::Admin::Compose::ContentsController < Spree::Admin::BaseController
 
   def new
     @content = Spree::Compose::Content.new
+    @content.assignments.build
   end
   
   def edit
+    @content.assignments.build
   end
 
   def create
@@ -40,7 +42,8 @@ class Spree::Admin::Compose::ContentsController < Spree::Admin::BaseController
   def permitted_resource_params
     params.require(:content).permit(
       :body, :slug, :subject_id, :content_type, :ancestry, :position, :description, :keywords, :title, :visible,
-      translations_attributes: [:id, :locale, :value, :body, :slug, :description, :keywords, :title]
+      translations_attributes: [:id, :locale, :value, :body, :slug, :description, :keywords, :title],
+      assignments_attributes: [:id, :content_id, :path, :zone, :position, :_destroy]
     )
   end
 end
